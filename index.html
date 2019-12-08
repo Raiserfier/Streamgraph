@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div align="center">
+    <h1 class="Fonts">Stream Graph</h1>
+    <h4 class="Fonts">by ZhaoHaojun 3170102480</h4>
+</div>
+<div align="center">
+    <svg xmlns="http://www.w3.org/2000/svg" id="svg" version="1.1" width="960" height="600"
+         class="svg_show layers"></svg>
+    <h3 class="Fonts">G0 = 0</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" id="svg1" version="1.1" width="960" height="600"
+         class="svg_show layers"></svg>
+    <h3 class="Fonts">G0 = -1/2(f1+f2+...+fn)</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" id="svg2" version="1.1" width="960" height="600"
+         class="svg_show layers"></svg>
+    <h3 class="Fonts">G0 = wiggle</h3>
+</div>
+<div>
+    <button class="Button" onclick="Update_svg()">Update</button>
+</div>
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <span>&copy; Zhao Haojun</span>
+    </div>
+</footer>
+</body>
+<style>
+    .svg_show {
+        margin-top: 50px;
+        border-radius: 5px;
+    }
+
+    .Fonts {
+        font-family: Candara, serif;
+        font-weight: bold;
+    }
+
+    .Button {
+        margin-top: 100px;
+        border-radius: 5px;
+        border: none;
+        width: 80px;
+        height: 25px;
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+    }
+
+    /*设置动画，分别为描边和透明度*/
+    @keyframes dash {
+        to {
+            stroke-dashoffset: 0;
+            fill-opacity: 1;
+        }
+    }
+
+    svg path {
+        stroke-dasharray: 2500;
+        stroke-dashoffset: 2500;
+        animation: dash 1.5s linear forwards;
+        transition: all 1s;
+    }
+
+    #footer {
+        margin-top: 5em;
+        padding: 8em 0 6em 0;
+        background: #f6f6f6;
+        color: #aaa;
+        text-align: center;
+    }
+    .container {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+</style>
+<!--用了一下jquery库-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="main.js"></script>
+<script>
+    (function ($) {
+        <!--hover 效果-->
+        $('body').on('mouseenter', 'path', function () {
+            var id = $(this).attr("id");
+            if (id < 20) {
+                $(this).css({
+                    "stroke-width": "1",
+                    "stroke": "wheat",
+                    "fill-opacity": "0.5",
+                });
+                if (id > 0) {
+                    $(this).next("path").css({
+                        "stroke-width": "1",
+                        "stroke": "wheat",
+                        "fill-opacity": "0.5",
+                    });
+                }
+            }
+        });
+        $('body').on('mouseleave', 'path', function () {
+            $(this).css({
+                "stroke-width": "0.1",
+                "stroke": "white",
+                "fill-opacity": "1",
+            });
+            $(this).next("path").css({
+                "stroke-width": "0.1",
+                "stroke": "white",
+                "fill-opacity": "1",
+            });
+        });
+    })(jQuery);
+</script>
+</html>
+
